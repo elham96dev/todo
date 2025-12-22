@@ -10,6 +10,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  bool checkBox = false;
   @override
   Widget build(BuildContext context) {
   return SafeArea(
@@ -35,6 +36,16 @@ class _HomeViewState extends State<HomeView> {
                   fontSize: 18,
                   color: Colors.green.shade800,
                 ),
+              ),
+              leading: Checkbox(
+                checkColor: Colors.white,
+                activeColor: Colors.green.shade800,
+                value: checkBox,
+                onChanged: (value) {
+                  setState(() {
+                    checkBox = value ?? false;
+                  });
+                }
               ),
             ),
           )
