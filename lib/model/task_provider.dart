@@ -19,6 +19,11 @@ class TaskProvider extends ChangeNotifier{
     list.first.isDone = !list.first.isDone;
     notifyListeners();
   }
+
+  void delete ({required String id}){
+    taskList.removeWhere((element) => element.id == id);
+    notifyListeners();
+  }
     
 }
 

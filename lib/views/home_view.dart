@@ -152,39 +152,102 @@ class _HomeViewState extends State<HomeView> {
                   // final tasks = watchProvider.tasks;
                   // final task = tasks[index];
                   final tasks = watchProvider.tasks[index];
-                  return Card(
-              elevation: 7,
-              child: ListTile(
-                title: Text(
-                  tasks.title,
-                  style: TextStyle(
-                    fontFamily: "todo",
-                    fontSize: 24,
-                    color: Colors.green.shade800,
-                    fontWeight: FontWeight.w400
-                  ),
-                ),
-                subtitle: Text(
-                  tasks.text,
-                    style: TextStyle(
-                    fontFamily: "todo",
-                    fontSize: 18,
-                    color: Colors.green.shade800,
-                  ),
-                ),
-                leading: Checkbox(
-                  checkColor: Colors.white,
-                  activeColor: Colors.green.shade800,
-                  value: tasks.isDone,
-                  onChanged: (value) {
-                    provider.update(id: tasks.id);
-                  // setState(() {
-                  //     checkBox = value ?? false;
-                  //   });  
-                }
-                ),
-              ),
-            );
+                  return Dismissible(
+                    key:Key(tasks.id),
+                    background: Card(
+                      color: Colors.red,
+                      child: Icon(
+                        Icons.delete,
+                        size: 40,
+                        color: Colors.white,
+                      ),
+                    ),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                      provider.delete(id: tasks.id);
+                    },
+                    confirmDismiss: (direction) async {
+                      return await showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder:(context) {
+                         return AlertDialog(
+                          title: Text(
+                            "Delet task",
+                            style: TextStyle(
+                              color: Colors.green.shade800,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          content: Text(
+                            "Are you sure?!",
+                            style: TextStyle(
+                              color: Colors.green.shade800,
+                              fontSize: 22,
+                            ),
+                          ),
+                          actions: [
+                            TextButton(onPressed:() {
+                              Navigator.pop(context,true);
+                            }, 
+                            child: Text(
+                              "Yes",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.green.shade800,
+                              ),
+                            ),
+                            ),
+                            TextButton(onPressed:() {
+                              Navigator.pop(context,false);
+                            }, 
+                            child: Text(
+                              "No",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.green.shade800,
+                              ),
+                            ),
+                            ),
+                          ],
+                          );
+                      },
+                      );
+                    },
+                    child: Card(
+                     elevation: 7,
+                    child: ListTile(
+                     title: Text(
+                     tasks.title,
+                     style: TextStyle(
+                      fontFamily: "todo",
+                      fontSize: 24,
+                      color: Colors.green.shade800,
+                      fontWeight: FontWeight.w400
+                    ),
+                                    ),
+                                    subtitle: Text(
+                    tasks.text,
+                      style: TextStyle(
+                      fontFamily: "todo",
+                      fontSize: 18,
+                      color: Colors.green.shade800,
+                    ),
+                                    ),
+                                    leading: Checkbox(
+                    checkColor: Colors.white,
+                    activeColor: Colors.green.shade800,
+                    value: tasks.isDone,
+                    onChanged: (value) {
+                      provider.update(id: tasks.id);
+                    // setState(() {
+                    //     checkBox = value ?? false;
+                    //   });  
+                                    }
+                                    ),
+                                  ),
+                                ),
+                  );
           },
           ),
         ),
