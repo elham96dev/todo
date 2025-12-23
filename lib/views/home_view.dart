@@ -125,6 +125,8 @@ class _HomeViewState extends State<HomeView> {
         );
         provider.create(task: task);
       }
+        _titleController.clear();
+        _textController.clear();
       },
       backgroundColor: Colors.green.shade800,
       shape: CircleBorder(),
@@ -143,7 +145,7 @@ class _HomeViewState extends State<HomeView> {
           children: [
             HeaderWidget(),
             SizedBox(
-              height: 300,
+              height: 380,
               child: ListView.builder(
                 itemCount: watchProvider.tasks.length,
                 itemBuilder:(context, index) {
