@@ -13,6 +13,12 @@ class TaskProvider extends ChangeNotifier{
     taskList.add(task);
     notifyListeners();
   }
+
+  void update ({required String id}){
+    final list = taskList.where((element) => element.id == id).toList();
+    list.first.isDone = !list.first.isDone;
+    notifyListeners();
+  }
     
 }
 

@@ -177,10 +177,11 @@ class _HomeViewState extends State<HomeView> {
                   activeColor: Colors.green.shade800,
                   value: tasks.isDone,
                   onChanged: (value) {
-                    setState(() {
-                      checkBox = value ?? false;
-                    });
-                  }
+                    provider.update(id: tasks.id);
+                  // setState(() {
+                  //     checkBox = value ?? false;
+                  //   });  
+                }
                 ),
               ),
             );
