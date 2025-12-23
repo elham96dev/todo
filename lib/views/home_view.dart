@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/constants/color_constant.dart';
+import 'package:todo_list/model/task.dart';
 import 'package:todo_list/model/task_provider.dart';
 import 'package:todo_list/widgets/header_widget.dart';
 
@@ -32,7 +33,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final watchProvider = context.watch<TaskProvider>();
-
+    final provider = context.read<TaskProvider>();
   return SafeArea(
     child: Scaffold(
       backgroundColor: gray3,
@@ -117,6 +118,12 @@ class _HomeViewState extends State<HomeView> {
       );
       if(add != null && add){
         //create task
+        final task = Task(
+          isDone: false,
+          title: _titleController.text,
+          text: _textController.text,
+        );
+        provider.create(task: task);
       }
       },
       backgroundColor: Colors.green.shade800,

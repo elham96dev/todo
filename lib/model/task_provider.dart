@@ -8,5 +8,11 @@ class TaskProvider extends ChangeNotifier{
     Task(isDone: true, title: "Title", text: "text..."),
   ];
   List<Task> get tasks => taskList;
+
+  void create ({required Task task}){
+    taskList.add(task);
+    notifyListeners();
+  }
+    
 }
 
