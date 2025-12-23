@@ -4,8 +4,8 @@ import 'package:todo_list/model/task.dart';
 
 class TaskProvider extends ChangeNotifier{
   final List<Task> taskList = [
-    Task(isDone: false, title: "title1", text: "text1"),
-    Task(isDone: true, title: "title2", text: "text2"),
+    Task(isDone: false, title: "Title", text: "text..."),
+    Task(isDone: true, title: "Title", text: "text..."),
   ];
   List<Task> get tasks => taskList;
 }

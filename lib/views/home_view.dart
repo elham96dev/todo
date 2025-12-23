@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_list/constants/color_constant.dart';
+import 'package:todo_list/model/task_provider.dart';
 import 'package:todo_list/widgets/header_widget.dart';
 
 class HomeView extends StatefulWidget {
@@ -14,6 +16,7 @@ class _HomeViewState extends State<HomeView> {
   bool checkBox = false;
   @override
   Widget build(BuildContext context) {
+    final watchProvider = context.watch<TaskProvider>();
   return SafeArea(
     child: Scaffold(
       backgroundColor: gray3,
@@ -39,16 +42,16 @@ class _HomeViewState extends State<HomeView> {
             SizedBox(
               height: 300,
               child: ListView.builder(
-                itemCount: 2,
+                itemCount: watchProvider.tasks.length,
                 itemBuilder:(context, index) {
-              },
-                      ),
-            ),
-            Card(
+                  // final tasks = watchProvider.tasks;
+                  // final task = tasks[index];
+                  final tasks = watchProvider.tasks[index];
+                  return Card(
               elevation: 7,
               child: ListTile(
                 title: Text(
-                  "Title",
+                  tasks.title,
                   style: TextStyle(
                     fontFamily: "todo",
                     fontSize: 24,
@@ -57,7 +60,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
                 subtitle: Text(
-                  "Text...",
+                  tasks.text,
                     style: TextStyle(
                     fontFamily: "todo",
                     fontSize: 18,
@@ -67,7 +70,7 @@ class _HomeViewState extends State<HomeView> {
                 leading: Checkbox(
                   checkColor: Colors.white,
                   activeColor: Colors.green.shade800,
-                  value: checkBox,
+                  value: tasks.isDone,
                   onChanged: (value) {
                     setState(() {
                       checkBox = value ?? false;
@@ -75,12 +78,16 @@ class _HomeViewState extends State<HomeView> {
                   }
                 ),
               ),
-            )
-          ],
+            );
+          },
+          ),
         ),
-      ),
+          
+      ],
     ),
-  );
+  ),
+),
+);
   
-  }
+}
 }
