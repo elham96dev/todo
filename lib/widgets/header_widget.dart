@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_list/model/task_provider.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({
@@ -8,6 +10,7 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Provider = context.watch<TaskProvider>();
     return SizedBox(
       height: 360,
       child: Stack(
@@ -57,7 +60,7 @@ class HeaderWidget extends StatelessWidget {
                       ),
                       ),
                        Text(
-                        "18",
+                        Provider.tasks.length.toString(),
                        style: TextStyle(
                         color: Colors.green.shade700,
                         fontFamily: "todo",
