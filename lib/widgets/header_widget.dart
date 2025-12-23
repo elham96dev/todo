@@ -10,7 +10,7 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Provider = context.watch<TaskProvider>();
+    final provider = context.watch<TaskProvider>();
     return SizedBox(
       height: 360,
       child: Stack(
@@ -60,7 +60,7 @@ class HeaderWidget extends StatelessWidget {
                       ),
                       ),
                        Text(
-                        Provider.tasks.length.toString(),
+                        provider.tasks.length.toString(),
                        style: TextStyle(
                         color: Colors.green.shade700,
                         fontFamily: "todo",
